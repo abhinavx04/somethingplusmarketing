@@ -1,0 +1,22 @@
+{
+  "name": "Plus Marketing Car Dealership",
+  "short_name": "Plus Marketing",
+  "description": "Plus Marketing - Your trusted partner for quality vehicles. Buy and sell cars with confidence.",
+  "start_url": "/login",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
