@@ -2,9 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/hooks/useAuth'
-// Remove these unused imports since loadImageUrls handles Firebase storage operations
-// import { storage } from '@/lib/firebase/config'
-// import { ref, getDownloadURL } from 'firebase/storage'
 import type { Car } from '@/lib/types/car'
 import { TrashIcon, PencilIcon, XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
@@ -145,7 +142,7 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
 
   const CardContent = () => (
     <>
-      <div className="relative h-72 bg-gray-100 group overflow-visible">
+      <div className="relative h-72 bg-gray-900/50 group overflow-visible">
         <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={currentImageIndex}
@@ -197,7 +194,7 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
                 e.preventDefault()
                 paginate(-1)
               }}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-sky-900/70 text-sky-100 p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
               aria-label="Previous image"
             >
               <ChevronLeftIcon className="w-5 h-5" />
@@ -208,7 +205,7 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
                 e.preventDefault()
                 paginate(1)
               }}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-sky-900/70 text-sky-100 p-2 rounded-full transition-all opacity-0 group-hover:opacity-100 focus:opacity-100 z-10"
               aria-label="Next image"
             >
               <ChevronRightIcon className="w-5 h-5" />
@@ -225,11 +222,10 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
                   }}
                   className={`w-2 h-2 rounded-full transition-opacity duration-200 ${
                     index === currentImageIndex 
-                      ? 'bg-white' 
-                      : 'bg-white/60'
+                      ? 'bg-cyan-400' 
+                      : 'bg-sky-400/60'
                   }`}
                   aria-label={`View image ${index + 1}`}
-                  type="button"
                 />
               ))}
             </div>
@@ -240,7 +236,7 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
           <div className="absolute top-4 right-4 flex gap-2 z-20">
             <button 
               onClick={() => setIsEditing(!isEditing)}
-              className="bg-amber-500/80 backdrop-blur-sm text-white p-2 rounded-full active:bg-amber-600 hover:bg-amber-600"
+              className="neo-button !p-2 !rounded-full"
               aria-label={isEditing ? "Cancel editing" : "Edit car listing"}
               type="button"
             >
@@ -263,7 +259,7 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
                     }
                   }
                 }}
-                className="bg-red-500/80 backdrop-blur-sm text-white p-2 rounded-full active:bg-red-600 hover:bg-red-600"
+                className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white p-2 rounded-full transition-all duration-300"
                 aria-label="Delete car listing"
                 type="button"
               >
@@ -276,8 +272,8 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
 
       <AnimatePresence mode="wait">
         {isEditing ? (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full">
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+            <div className="bg-glass rounded-lg p-6 max-w-md w-full border border-white/10">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-semibold">Edit Listing</h3>
                 <button
@@ -354,17 +350,17 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
           >
             <div className="flex justify-between items-start mb-4">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{car.name}</h3>
-                <p className="text-amber-600 font-bold text-lg">
+                <h3 className="card-title mb-2">{car.name}</h3>
+                <p className="price-text glow-text">
                   {formatPrice(car.price)}
                 </p>
               </div>
             </div>
             
-            <p className="text-gray-600 text-sm mb-4 line-clamp-2">{car.info}</p>
+            <p className="info-text line-clamp-2">{car.info}</p>
             
-            <div className="flex justify-between items-center">
-              <span className="text-gray-500 text-sm">Year: {car.year}</span>
+            <div className="flex justify-between items-center mt-4">
+              <span className="text-secondary">Year: {car.year}</span>
             </div>
           </motion.div>
         )}
@@ -374,9 +370,9 @@ export default function CarCard({ car, onDelete, onUpdate, isAdminPage }: CarCar
 
   return (
     <motion.div 
-      className="bg-white rounded-xl shadow-lg overflow-hidden"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      className="glass-card rounded-2xl overflow-hidden hover:border-cyan-400/30 transition-all duration-300"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
     >
       {isAdminPage ? (

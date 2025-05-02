@@ -71,17 +71,19 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-      
-      {error && (
-        <div className="mb-4 p-2 bg-red-100 text-red-600 rounded">
-          {error}
-        </div>
-      )}
+    <div className="max-w-md mx-auto mt-12 p-8">
+      <div className="glass-card p-8 rounded-2xl">
+        <h2 className="text-3xl font-bold mb-6 text-center text-white glow-effect">
+          Login
+        </h2>
+        
+        {error && (
+          <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 text-red-200 rounded-lg">
+            {error}
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
             name="email"
@@ -89,12 +91,9 @@ export default function LoginForm() {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-500"
-            aria-label="Email"
+            className="neo-input w-full"
           />
-        </div>
-        
-        <div>
+          
           <input
             type="password"
             name="password"
@@ -102,21 +101,18 @@ export default function LoginForm() {
             required
             value={formData.password}
             onChange={handleChange}
-            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-amber-500"
-            aria-label="Password"
+            className="neo-input w-full"
           />
-        </div>
 
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-amber-500 text-white py-2 rounded hover:bg-amber-600 
-                   transition disabled:bg-gray-400"
-          aria-label={isLoading ? 'Processing' : 'Login'}
-        >
-          {isLoading ? 'Processing...' : 'Login'}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="neo-button w-full"
+          >
+            {isLoading ? 'Processing...' : 'Login'}
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
